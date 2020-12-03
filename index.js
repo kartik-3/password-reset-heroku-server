@@ -10,4 +10,4 @@ app
   .use(bodyParser.json())
   .use(bodyParser.urlencoded())
   .use("/email", emailRouter)
-  .listen(process.env.PORT || 5000);
+  .listen(process.env.PORT, "0.0.0.0");
