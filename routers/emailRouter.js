@@ -68,7 +68,7 @@ mongoClient.connect(mongoURL, (err, dbname) => {
               }
             );
 
-            const mailBodyUrl = `http://localhost:5500/client/newPassword.html?mail=${req.body.email}&rand=${rand}`;
+            const mailBodyUrl = `https://password-reset-kartik.netlify.app/newPassword.html?mail=${req.body.email}&rand=${rand}`;
             const mailBody = `<p>Open the following link for verification<p><br/><i>${mailBodyUrl}</i>`;
             var mailOptions = {
               from: "kartik3896@gmail.com",
