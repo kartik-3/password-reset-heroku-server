@@ -11,8 +11,9 @@ const mongoURL = process.env.MONGO_URL;
 
 var transporter = nodemailer.createTransport({
   service: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  ignoreTLS: false,
+  secure: false,
   auth: {
     user: process.env.USER_EMAIL,
     pass: process.env.USER_PASSWORD,
