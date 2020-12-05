@@ -12,7 +12,8 @@ const mongoURL = process.env.MONGO_URL;
 const smtpConfig = {
   service: "smtp.gmail.com",
   port: 465,
-  secure: true,
+  secure: false,
+  ignoreTLS: true,
   auth: {
     user: process.env.USER_EMAIL,
     pass: process.env.USER_PASSWORD,
