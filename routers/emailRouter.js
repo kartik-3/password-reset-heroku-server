@@ -19,8 +19,6 @@ const smtpConfig = {
   },
 };
 
-var transporter = nodemailer.createTransport(smtpConfig);
-
 mongoClient.connect(mongoURL, (err, dbname) => {
   if (err) throw err;
 
@@ -53,6 +51,7 @@ mongoClient.connect(mongoURL, (err, dbname) => {
       }
     })
     .put("/", (req, res) => {
+      var transporter = nodemailer.createTransport(smtpConfig);
       db.collection("emails").findOne(
         { email: req.body.email },
         (err, response) => {
