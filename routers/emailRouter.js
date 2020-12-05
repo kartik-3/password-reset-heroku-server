@@ -1,4 +1,3 @@
-const { response } = require("express");
 const express = require("express");
 const mongo = require("mongodb");
 const nodemailer = require("nodemailer");
@@ -8,14 +7,13 @@ const emailRouter = express.Router();
 
 const mongoClient = mongo.MongoClient;
 
-const mongoURL =
-  "mongodb+srv://admin:testing1@cluster1.gfegd.mongodb.net/reset-password?retryWrites=true&w=majority";
+const mongoURL = process.env.MONGO_URL;
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "kartik3896@gmail.com",
-    pass: "********",
+    user: process.env.USER_EMAIL,
+    pass: process.env.USER_PASSWORD,
   },
 });
 
@@ -71,7 +69,7 @@ mongoClient.connect(mongoURL, (err, dbname) => {
             const mailBodyUrl = `https://password-reset-kartik.netlify.app/newPassword.html?mail=${req.body.email}&rand=${rand}`;
             const mailBody = `<p>Open the following link for verification<p><br/><i>${mailBodyUrl}</i>`;
             var mailOptions = {
-              from: "kartik3896@gmail.com",
+              from: process.env.USER_EMAIL,
               to: req.body.email,
               subject: "Verification link",
               html: mailBody,
