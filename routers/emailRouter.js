@@ -9,16 +9,17 @@ const mongoClient = mongo.MongoClient;
 
 const mongoURL = process.env.MONGO_URL;
 
-var transporter = nodemailer.createTransport({
+const smtpConfig = {
   service: "smtp.gmail.com",
-  port: 587,
-  ignoreTLS: false,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.USER_EMAIL,
     pass: process.env.USER_PASSWORD,
   },
-});
+};
+
+var transporter = nodemailer.createTransport(smtpConfig);
 
 mongoClient.connect(mongoURL, (err, dbname) => {
   if (err) throw err;
