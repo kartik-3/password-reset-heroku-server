@@ -51,7 +51,15 @@ mongoClient.connect(mongoURL, (err, dbname) => {
       }
     })
     .put("/", (req, res) => {
-      var transporter = nodemailer.createTransport(smtpConfig);
+      var transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+                port: 587,
+  secure: false, 
+  auth: {
+    user: process.env.USER_EMAIL,
+    pass: process.env.USER_PASSWORD,
+  },
+});
       db.collection("emails").findOne(
         { email: req.body.email },
         (err, response) => {
